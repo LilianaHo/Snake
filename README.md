@@ -1,5 +1,8 @@
 # Snake Game
+
 Made with python utilising pygame.
+
+![Snake Game](https://github.com/LilianaHo/Snake/blob/master/media/game_screenshot.png)
 
 ## Linux
 ### Requirements
