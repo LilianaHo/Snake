@@ -31,7 +31,8 @@ def display():
 game_width = 50
 game_length = 50
 amplification = 10
-
+high_score = 0
+new_high_score = False
 snake_location = [game_width//2, game_length//2]
 snake_tail_length = 0
 snake_tail = []
@@ -62,13 +63,20 @@ font = pygame.font.Font("Pixeboy-z8XGD.ttf", 100)
 text = font.render("Snake", True, (255, 0, 255))
 tiny_font = pygame.font.Font("Pixeboy-z8XGD.ttf", 36)
 tiny_text = tiny_font.render("press t to play", True, (255, 0, 255))
+high_score_font = pygame.font.Font("Pixeboy-z8XGD.ttf", 36)
 
 # snake game
 running = True
 game_over = True
 while running:
-    screen.blit(text, (SCREEN_WIDTH // 2 - 112, SCREEN_WIDTH // 2 - 100))
-    screen.blit(tiny_text, (SCREEN_WIDTH // 2 - 105, SCREEN_WIDTH // 2 + 100))
+    screen.blit(text, (SCREEN_WIDTH // 2 - 112, SCREEN_LENGTH // 2 - 100))
+    screen.blit(tiny_text, (SCREEN_WIDTH // 2 - 105, SCREEN_LENGTH // 2 + 100))
+    high_score_colour = 100, 0, 100
+    if new_high_score is True:
+        high_score_colour = 0, 255, 0
+    high_score_text = high_score_font.render("HIGH SCORE: " + str(high_score), True, high_score_colour)
+    screen.blit(high_score_text, (5, SCREEN_LENGTH - 25))
+
     pygame.display.update()
     button = pygame.key.get_pressed()
     if button[pygame.K_t]:
@@ -119,8 +127,14 @@ while running:
 
         if snake_location in snake_tail:
             game_over = True
+            if high_score < snake_tail_length:
+                high_score = snake_tail_length
+                new_high_score = True
         if snake_location[0] >= game_width - 1 or snake_location[0] < 0 or snake_location[1] >= game_length - 1 or snake_location[1] < 0:
             game_over = True
+            if high_score < snake_tail_length:
+                high_score = snake_tail_length
+                new_high_score = True
 
         if snake_tail_length > 0:
             snake_tail = snake_travel_history[len(snake_travel_history) - snake_tail_length:]
