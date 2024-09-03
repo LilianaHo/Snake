@@ -144,6 +144,8 @@ while running:
         if snake_location == food_location:
             snake_tail_length += 1
             food_location = [random.randrange(0, game_width), random.randrange(0, game_length)]
+            while food_location in snake_travel_history:
+                food_location = [random.randrange(0, game_width), random.randrange(0, game_length)]
 
         # visuals
         display()
