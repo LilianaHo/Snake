@@ -74,6 +74,7 @@ while running:
     high_score_colour = 100, 0, 100
     if new_high_score is True:
         high_score_colour = 0, 255, 0
+        new_high_score = False
     high_score_text = high_score_font.render("HIGH SCORE: " + str(high_score), True, high_score_colour)
     screen.blit(high_score_text, (5, SCREEN_LENGTH - 25))
 
